@@ -1,58 +1,14 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <title>LLWIN CỔNG QUỐC TẾ UY TÍN HÀNG ĐẦU</title>
-    <link id="favicon" rel="icon" type="image/png" href="llwin-gold-logo.png">
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&family=Oswald:wght@600;700&family=Be+Vietnam+Pro:wght@400;600;700&family=Roboto:wght@700;900&display=swap" rel="stylesheet">
-    
-    <!-- Tailwind CSS cho Stage 1 Preloader -->
-    <link href="public/css/tailwind.css" rel="stylesheet">
-
-    <style>
-        /* Tùy chỉnh hiệu ứng Stage 1 */
-        #stage1 {
-            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s;
-        }
-        #stage1.fade-out {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
-        
-        #stage2 {
-            opacity: 0;
-            transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1);
-            min-height: 100vh;
-        }
-        #stage2.active {
-            opacity: 1;
-        }
-
-        .cyber-progress-bar {
-            width: 100%;
-            height: 6px;
-            background: rgba(245, 174, 66, 0.15);
-            border-radius: 999px;
-            overflow: hidden;
-            position: relative;
-            box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.8);
-        }
-        .cyber-progress-fill {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, #ea9c2c, #f5ae42, #ffea9f);
-            box-shadow: 0 0 12px #f5ae42;
-            transition: width 0.1s linear;
-        }
-
-        /* CSS của Stage 2 (Mẫu Cổng Quốc Tế) */
-        
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>LLWIN CỔNG QUỐC TẾ UY TÍN HÀNG ĐẦU</title>
+<link rel="preconnect" href="https://blob.kcam.io" crossorigin>
+<link rel="dns-prefetch" href="https://blob.kcam.io">
+<link rel="preload" as="video" href="https://blob.kcam.io/uploads/kjc/1121.mp4" type="video/mp4" fetchpriority="high">
+<link id="favicon" rel="icon" type="image/png" href="">
+<style>
 /* MOBILE OVERRIDE - ĐẶT ĐẦU TIÊN */
 @media screen and (max-width: 768px) {
   #logo-area {
@@ -102,85 +58,454 @@
     padding: 6px 12px 10px !important;
   }
 }
+</style>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-    </style>
+body {
+  background: transparent;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: sans-serif;
+  overflow: hidden;
+  padding-top: 35vh;
+}
+
+@media (max-width: 700px) {
+  body {
+    padding-top: 0;
+    justify-content: flex-end;
+    padding-bottom: 6vh;
+    overflow-y: auto;
+    height: 100dvh;
+  }
+}
+
+/* Vùng trên: logo/tiêu đề - tách hoàn toàn khỏi flow */
+.header-area {
+  position: absolute;
+  top: 22vh;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 10;
+}
+
+@media (max-width: 700px) {
+  .header-area {
+    position: relative;
+    top: auto;
+    padding: 0 12px 10px;
+  }
+}
+
+/* Hàng card nằm ngang phía dưới */
+.cards-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  padding: 0 16px 0;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+}
+
+/* === MOBILE: 2 card / hàng === */
+@media (max-width: 700px) {
+  .cards-row {
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 0 10px;
+  }
+  .card-outer {
+    width: calc(50% - 6px) !important;
+    min-width: 0;
+    flex-shrink: 1;
+  }
+  .card { padding: 8px 8px 10px !important; }
+  .globe-wrap { width: 70px !important; height: 70px !important; }
+  .ring1, .ring2, .ring3 { width: auto !important; height: auto !important; }
+  .globe-canvas, .globe-gif { width: 58px !important; height: 58px !important; }
+  .name { font-size: 12px !important; letter-spacing: 0.1em !important; }
+  .sub { font-size: 6.5px !important; }
+  .sv { font-size: 9px !important; }
+  .sl { font-size: 7px !important; }
+  .stats { gap: 6px !important; }
+  .btn { font-size: 9px !important; padding: 7px 4px !important; letter-spacing: 0.08em !important; }
+}
+
+/* === SHARED CARD STYLES === */
+.card-outer { position:relative; width:280px; cursor:pointer; transition:transform 0.3s; flex-shrink:0; }
+.card-outer:hover { transform:translateY(-8px); }
+.border-svg { position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:3; overflow:visible; }
+.btrack { fill:none; stroke-width:1.5; }
+
+/* Brazil */
+.br .bt  { fill:none; stroke:#009C3B; stroke-width:2.5; stroke-linecap:round; stroke-dasharray:110 9999; animation:br 2s linear infinite; filter:drop-shadow(0 0 6px #009C3B); }
+.br .bt2 { fill:none; stroke:#FEDF00; stroke-width:1.5; stroke-linecap:round; stroke-dasharray:55 9999; animation:br 2s linear infinite; animation-delay:-0.9s; filter:drop-shadow(0 0 4px #FEDF00); }
+.br .bt3 { fill:none; stroke:rgba(255,255,255,0.6); stroke-width:1; stroke-linecap:round; stroke-dasharray:30 9999; animation:br 2s linear infinite; animation-delay:-1.5s; }
+.br .btrack { stroke:rgba(0,156,59,0.12); }
+.br .card { background:linear-gradient(160deg,rgba(0,10,3,0.45) 0%,rgba(0,5,1,0.55) 100%); border:1px solid rgba(0,156,59,0.3); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); }
+.br .card::after { background:radial-gradient(ellipse,rgba(0,156,59,0.18) 0%,transparent 70%); }
+.br .ring1 { border:1px solid rgba(0,156,59,0.18); }
+.br .ring1::before { border:1px dashed rgba(254,223,0,0.12); }
+.br .ring2 { border-top-color:#009C3B; border-right-color:rgba(0,156,59,0.4); filter:drop-shadow(0 0 4px #009C3B); }
+.br .ring3 { border-bottom-color:rgba(254,223,0,0.45); }
+.br .divider { background:linear-gradient(90deg,transparent,rgba(0,156,59,0.7),transparent); }
+.br .blk { background:#009C3B; box-shadow:0 0 5px rgba(0,156,59,0.9); }
+
+/* Singapore */
+.sg .bt  { fill:none; stroke:#C0001A; stroke-width:2.5; stroke-linecap:round; stroke-dasharray:110 9999; animation:br 2s linear infinite; filter:drop-shadow(0 0 6px #C0001A); }
+.sg .bt2 { fill:none; stroke:#ffffff; stroke-width:1.5; stroke-linecap:round; stroke-dasharray:55 9999; animation:br 2s linear infinite; animation-delay:-0.9s; }
+.sg .bt3 { fill:none; stroke:rgba(255,255,255,0.3); stroke-width:1; stroke-linecap:round; stroke-dasharray:30 9999; animation:br 2s linear infinite; animation-delay:-1.5s; }
+.sg .btrack { stroke:rgba(192,0,26,0.12); }
+.sg .card { background:linear-gradient(160deg,rgba(28,4,4,0.45) 0%,rgba(10,0,0,0.55) 100%); border:1px solid rgba(192,0,26,0.3); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); }
+.sg .card::after { background:radial-gradient(ellipse,rgba(192,0,26,0.18) 0%,transparent 70%); }
+.sg .ring1 { border:1px solid rgba(192,0,26,0.18); }
+.sg .ring1::before { border:1px dashed rgba(255,255,255,0.12); }
+.sg .ring2 { border-top-color:#C0001A; border-right-color:rgba(192,0,26,0.4); filter:drop-shadow(0 0 4px #C0001A); }
+.sg .ring3 { border-bottom-color:rgba(255,255,255,0.3); }
+.sg .divider { background:linear-gradient(90deg,transparent,rgba(192,0,26,0.7),transparent); }
+.sg .blk { background:#C0001A; box-shadow:0 0 5px rgba(192,0,26,0.9); }
+
+/* UAE */
+.ae .bt  { fill:none; stroke:#FF0000; stroke-width:2.5; stroke-linecap:round; stroke-dasharray:110 9999; animation:br 2s linear infinite; filter:drop-shadow(0 0 6px #FF0000); }
+.ae .bt2 { fill:none; stroke:#00732F; stroke-width:1.5; stroke-linecap:round; stroke-dasharray:55 9999; animation:br 2s linear infinite; animation-delay:-0.9s; filter:drop-shadow(0 0 4px #00732F); }
+.ae .bt3 { fill:none; stroke:rgba(255,255,255,0.5); stroke-width:1; stroke-linecap:round; stroke-dasharray:30 9999; animation:br 2s linear infinite; animation-delay:-1.5s; }
+.ae .btrack { stroke:rgba(255,0,0,0.12); }
+.ae .card { background:linear-gradient(160deg,rgba(5,20,5,0.45) 0%,rgba(2,10,2,0.55) 100%); border:1px solid rgba(0,115,47,0.3); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); }
+.ae .card::after { background:radial-gradient(ellipse,rgba(0,115,47,0.15) 0%,transparent 70%); }
+.ae .ring1 { border:1px solid rgba(0,115,47,0.18); }
+.ae .ring1::before { border:1px dashed rgba(255,0,0,0.15); }
+.ae .ring2 { border-top-color:#00732F; border-right-color:rgba(255,0,0,0.5); filter:drop-shadow(0 0 4px #00732F); }
+.ae .ring3 { border-bottom-color:rgba(255,0,0,0.4); }
+.ae .divider { background:linear-gradient(90deg,transparent,rgba(0,115,47,0.7),transparent); }
+.ae .blk { background:#00732F; box-shadow:0 0 5px rgba(0,115,47,0.9); }
+
+/* Vietnam */
+.vn .bt  { fill:none; stroke:#DA251D; stroke-width:2.5; stroke-linecap:round; stroke-dasharray:110 9999; animation:br 2s linear infinite; filter:drop-shadow(0 0 6px #DA251D); }
+.vn .bt2 { fill:none; stroke:#f5c518; stroke-width:1.5; stroke-linecap:round; stroke-dasharray:55 9999; animation:br 2s linear infinite; animation-delay:-0.9s; filter:drop-shadow(0 0 4px #f5c518); }
+.vn .bt3 { fill:none; stroke:rgba(255,255,255,0.6); stroke-width:1; stroke-linecap:round; stroke-dasharray:30 9999; animation:br 2s linear infinite; animation-delay:-1.5s; }
+.vn .btrack { stroke:rgba(218,37,29,0.12); }
+.vn .card { background:linear-gradient(160deg,rgba(28,4,4,0.45) 0%,rgba(10,0,0,0.55) 100%); border:1px solid rgba(218,37,29,0.3); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); }
+.vn .card::after { background:radial-gradient(ellipse,rgba(218,37,29,0.18) 0%,transparent 70%); }
+.vn .ring1 { border:1px solid rgba(218,37,29,0.18); }
+.vn .ring1::before { border:1px dashed rgba(245,197,24,0.12); }
+.vn .ring2 { border-top-color:#DA251D; border-right-color:rgba(218,37,29,0.4); filter:drop-shadow(0 0 4px #DA251D); }
+.vn .ring3 { border-bottom-color:rgba(245,197,24,0.45); }
+.vn .divider { background:linear-gradient(90deg,transparent,rgba(218,37,29,0.7),transparent); }
+.vn .blk { background:#DA251D; box-shadow:0 0 5px rgba(218,37,29,0.9); }
+
+@keyframes br { from{stroke-dashoffset:0} to{stroke-dashoffset:-9999} }
+
+.card { border-radius:24px; padding:14px 16px 14px; display:flex; flex-direction:column; align-items:center; gap:0; position:relative; z-index:1; overflow:hidden; }
+.card::after { content:''; position:absolute; top:-60px; left:50%; transform:translateX(-50%); width:220px; height:140px; pointer-events:none; }
+.globe-wrap { position:relative; width:130px; height:130px; display:flex; align-items:center; justify-content:center; margin-bottom:14px; }
+.ring1 { position:absolute; inset:-10px; border-radius:50%; animation:spin-slow 8s linear infinite; }
+.ring1::before { content:''; position:absolute; inset:5px; border-radius:50%; }
+.ring2 { position:absolute; inset:0; border-radius:50%; border:2px solid transparent; animation:spin-med 1.8s cubic-bezier(0.6,0.2,0.4,0.8) infinite; }
+.ring3 { position:absolute; inset:12px; border-radius:50%; border:1.5px solid transparent; animation:spin-slow 3s linear infinite reverse; }
+@keyframes spin-slow { to{transform:rotate(360deg)} }
+@keyframes spin-med  { to{transform:rotate(360deg)} }
+canvas.globe-canvas { border-radius:50%; display:block; position:relative; z-index:2; }
+img.globe-gif { width:100px; height:100px; border-radius:50%; display:block; position:relative; z-index:2; object-fit:cover; }
+.sub  { font-size:12px; letter-spacing:0.25em; color:rgba(255,255,255,0.4); font-family:'Courier New',monospace; text-transform:uppercase; margin-bottom:3px; }
+.name { font-size:26px; font-weight:900; color:#f5a800; letter-spacing:0.12em; font-family:'Courier New',monospace; text-shadow:0 0 24px rgba(200,120,0,0.7); margin-bottom:5px; }
+.divider { width:40px; height:1px; margin:6px 0 10px; }
+.stats { display:flex; gap:0; width:100%; margin-bottom:16px; }
+.stat { flex:1; text-align:center; border-right:1px solid rgba(255,255,255,0.06); padding:5px 2px; }
+.stat:last-child { border-right:none; }
+.sl { font-size:10px; color:rgba(255,255,255,0.35); text-transform:uppercase; letter-spacing:0.12em; font-family:'Courier New',monospace; display:block; margin-bottom:4px; }
+.sv { font-size:13px; font-weight:700; color:#f5c518; font-family:'Courier New',monospace; display:block; }
+.shield-blocks { display:flex; gap:2px; justify-content:center; }
+.blk { width:6px; height:11px; border-radius:1px; animation:blk-pulse 1.8s ease-in-out infinite; }
+.blk:nth-child(2){animation-delay:0.15s} .blk:nth-child(3){animation-delay:0.3s}
+.blk:nth-child(4){animation-delay:0.45s} .blk:nth-child(5){animation-delay:0.6s} .blk:nth-child(6){animation-delay:0.75s}
+@keyframes blk-pulse{0%,100%{opacity:1}50%{opacity:0.35}}
+.star-row { display:flex; gap:2px; justify-content:center; }
+.star svg { width:10px; height:10px; filter:drop-shadow(0 0 3px #FFD700); }
+.btn-wrap { width:100%; display:flex; justify-content:center; }
+button.btn { all:unset; display:inline-block; padding:10px 24px; border-radius:8px; cursor:pointer; background:#ffffff; color:#111111; font-size:13px; font-weight:700; font-family:'Oswald',sans-serif; letter-spacing:0.14em; text-transform:uppercase; white-space:nowrap; text-align:center; box-shadow:0 2px 16px rgba(0,0,0,0.4); position:relative; overflow:hidden; transition:transform 0.2s; }
+button.btn::before { content:''; position:absolute; top:0; left:-60%; width:40%; height:100%; background:rgba(255,255,255,0.4); transform:skewX(-20deg); animation:shine 3.5s ease-in-out infinite; }
+@keyframes shine{0%,65%,100%{left:-60%;opacity:0}45%{left:120%;opacity:1}}
+button.btn:hover { transform:scale(1.05) translateY(-1px); }
+.particles { position:absolute; inset:0; pointer-events:none; z-index:0; overflow:hidden; border-radius:24px; }
+.p { position:absolute; border-radius:50%; opacity:0; animation:fp linear infinite; }
+@keyframes fp{0%{opacity:0;transform:translateY(0) scale(0)}20%{opacity:.7;transform:translateY(-25px) scale(1)}100%{opacity:0;transform:translateY(-90px) scale(.3)}}
+
+/* Video background */
+.video-bg {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  pointer-events: none;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Messenger circle */
+.ms-circle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.ms-ring-outer {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ms-spin1 {
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(0,132,255,0.25);
+  animation: spin-slow 8s linear infinite;
+}
+.ms-spin2 {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2.5px solid transparent;
+  border-top-color: #0084FF;
+  border-right-color: rgba(168,85,247,0.6);
+  animation: spin-med 1.8s cubic-bezier(0.6,0.2,0.4,0.8) infinite;
+  filter: drop-shadow(0 0 6px #0084FF);
+}
+.ms-spin3 {
+  position: absolute;
+  inset: 10px;
+  border-radius: 50%;
+  border: 1.5px solid transparent;
+  border-bottom-color: rgba(168,85,247,0.4);
+  animation: spin-slow 3s linear infinite reverse;
+}
+.ms-icon {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0084FF 0%, #A855F7 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 40px rgba(0,132,255,0.6), 0 0 80px rgba(168,85,247,0.3);
+  position: relative;
+  z-index: 2;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.ms-circle:hover .ms-icon {
+  transform: scale(1.08);
+  box-shadow: 0 0 60px rgba(0,132,255,0.8), 0 0 100px rgba(168,85,247,0.5);
+}
+.ms-label {
+  margin-top: 14px;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: 'Oswald', sans-serif;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #ffffff;
+  text-shadow: 0 0 12px rgba(0,132,255,0.8);
+}
+.ms-sub {
+  font-size: 10px;
+  font-family: 'Courier New', monospace;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 0.15em;
+  margin-top: 3px;
+}
+/* Pulse animation */
+.ms-icon::after {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 2px solid rgba(0,132,255,0.4);
+  animation: ms-pulse 2s ease-out infinite;
+}
+@keyframes ms-pulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(1.25); opacity: 0; }
+}
+
+.ms-float {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+.ms-float .ms-ring-outer {
+  width: 90px;
+  height: 90px;
+}
+.ms-float .ms-icon {
+  width: 70px;
+  height: 70px;
+}
+.ms-float .ms-icon svg {
+  width: 38px;
+  height: 38px;
+}
+.ms-float .ms-label {
+  font-size: 10px;
+  margin-top: 6px;
+}
+.ms-float .ms-sub { display: none; }
+.ms-float { transition: transform 0.3s; }
+.ms-float:hover { transform: translateY(-8px); }
+</style>
+
+<style>
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes spinSlowRev {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+.anim-spin-globe {
+  animation: spinSlow 70s linear infinite;
+}
+.anim-spin-dashed {
+  animation: spinSlow 60s linear infinite;
+}
+.anim-spin-dotted {
+  animation: spinSlowRev 90s linear infinite;
+}
+</style>
+
 </head>
-<body class="bg-black text-white antialiased overflow-x-hidden">
+<body>
 
-    <!-- ================= STAGE 1: PRE-LOADER (NỀN ĐỊA CẦU VÀNG LLWINCT.COM) ================= -->
-    <div id="stage1" class="fixed inset-0 z-50 overflow-hidden bg-black flex items-center justify-center">
-
-        <!-- LAYER 0: ROTATING GOLD GLOBE & SPACE CYBER BACKDROP (NỀN LLWINCT.COM) -->
-        <div class="absolute inset-0 pointer-events-none flex items-center justify-center overflow-hidden bg-[#0a0803]">
-            <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#2a1d08]/75 via-[#0f0b04]/92 to-[#030201]"></div>
-            
-            <div class="relative w-[450px] h-[450px] sm:w-[650px] sm:h-[650px] md:w-[850px] md:h-[850px] lg:w-[1100px] lg:h-[1100px] flex items-center justify-center">
-                <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-[#f5ae42]/35 via-[#e09119]/25 to-amber-600/15 blur-3xl animate-pulse"></div>
-                <div class="absolute inset-[-20px] rounded-full border border-[#f5ae42]/35 border-dashed animate-[spin_60s_linear_infinite]"></div>
-                <div class="absolute inset-[-40px] rounded-full border border-amber-400/20 border-dotted animate-[spin_90s_linear_infinite_reverse]"></div>
-                
-                <div class="w-full h-full rounded-full overflow-hidden relative z-10 [mask-image:radial-gradient(circle_at_center,black_48%,transparent_68%)] [-webkit-mask-image:radial-gradient(circle_at_center,black_48%,transparent_68%)]">
-                    <img src="public/assets/gold-globe.png" alt="Gold Globe" class="w-full h-full object-cover scale-105 animate-[spin_70s_linear_infinite]">
-                </div>
-            </div>
-        </div>
-
-        <!-- TOP APP LOGO HEADER -->
-        <div class="absolute top-4 sm:top-6 left-1/2 -translate-x-1/2 z-40 flex flex-col items-center pointer-events-none">
-            <img src="llwin-gold-logo.png"
-                 alt="LLWIN Logo"
-                 class="h-12 sm:h-16 md:h-20 max-w-[85vw] object-contain drop-shadow-[0_0_25px_rgba(245,174,66,0.9)] filter brightness-110">
-        </div>
-
-        <!-- RESPONSIVE BACKGROUND FRAMES -->
-        <!-- Desktop -->
-        <div class="hidden lg:flex absolute inset-0 items-center justify-center pointer-events-none">
-            <img src="public/assets/desktop.png" class="w-full h-full object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.95)]" alt="Desktop BG">
-        </div>
-        <!-- Tablet -->
-        <div class="hidden md:flex lg:hidden absolute inset-0 items-center justify-center pointer-events-none">
-            <img src="public/assets/tablet.png" class="w-full h-full object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.95)]" alt="Tablet BG">
-        </div>
-        <!-- Mobile -->
-        <div class="flex md:hidden absolute inset-0 items-center justify-center pointer-events-none">
-            <img src="public/assets/mobile.png" class="w-full h-full object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.95)]" alt="Mobile BG">
-        </div>
-
-        <!-- INTERACTIVE CENTER CARD & COUNTDOWN -->
-        <div class="relative z-40 flex flex-col items-center max-w-[90vw] sm:max-w-[420px] text-center px-4 mt-20 sm:mt-24">
-            <div class="p-6 rounded-2xl bg-black/75 border border-[#f5ae42]/40 backdrop-blur-md shadow-[0_0_40px_rgba(245,174,66,0.25)] w-full">
-                
-                <p id="cyber-status-text" class="text-xs sm:text-sm font-mono tracking-widest text-[#ffea9f] mb-3 uppercase">
-                    ⚡ Đang khởi tạo kết nối an toàn...
-                </p>
-
-                <!-- Progress Bar -->
-                <div class="cyber-progress-bar mb-3">
-                    <div id="cyber-progress" class="cyber-progress-fill"></div>
-                </div>
-
-                <div class="flex justify-between items-center text-[10px] sm:text-xs font-mono text-[#e2d5c3]/70 mb-4">
-                    <span>XÁC THỰC BẢO MẬT VIP</span>
-                    <span id="countdown-text" class="text-[#f5ae42] font-bold">5s</span>
-                </div>
-
-                <!-- CTA Button -->
-                <button onclick="skipToStage2()"
-                   class="w-full inline-flex items-center justify-center py-3 px-6 rounded-xl bg-gradient-to-r from-[#ea9c2c] via-[#f5ae42] to-[#ffea9f] text-black font-black uppercase text-sm tracking-wider shadow-[0_0_20px_rgba(245,174,66,0.6)] hover:scale-105 active:scale-95 transition-all cursor-pointer">
-                    <span>VÀO CỔNG CHÍNH THỨC NGAY ➔</span>
-                </button>
-            </div>
-            
-            <button onclick="skipToStage2()" class="mt-4 text-xs font-mono text-white/50 hover:text-white underline tracking-wider cursor-pointer">
-                [ Bỏ qua đếm ngược ]
-            </button>
-        </div>
-
+<!-- ================= 5S PRELOADER OVERLAY (NỀN LLWINCT.COM) ================= -->
+<div id="preload-5s-overlay" style="
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99999999;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.6s;
+">
+  <!-- LAYER 0: ROTATING GOLD GLOBE & SPACE CYBER BACKDROP (NỀN LLWINCT.COM) -->
+  <div style="position: absolute; inset: 0; pointer-events: none; display: flex; align-items: center; justify-content: center; overflow: hidden; background: #0a0803;">
+    <div style="position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(42,29,8,0.75) 0%, rgba(15,11,4,0.92) 50%, #030201 100%);"></div>
+    <div style="position: relative; width: min(90vw, 850px); height: min(90vw, 850px); display: flex; align-items: center; justify-content: center;">
+      <div style="position: absolute; inset: 0; border-radius: 50%; background: linear-gradient(to top right, rgba(245,174,66,0.35), rgba(224,145,25,0.25), rgba(217,119,6,0.15)); filter: blur(40px);"></div>
+      <div class="anim-spin-dashed" style="position: absolute; inset: -20px; border-radius: 50%; border: 1px dashed rgba(245,174,66,0.35);"></div>
+      <div class="anim-spin-dotted" style="position: absolute; inset: -40px; border-radius: 50%; border: 1px dotted rgba(251,191,36,0.2);"></div>
+      <div style="width: 100%; height: 100%; border-radius: 50%; overflow: hidden; position: relative; z-index: 10; -webkit-mask-image: radial-gradient(circle at center, black 48%, transparent 68%); mask-image: radial-gradient(circle at center, black 48%, transparent 68%);">
+        <img src="public/assets/gold-globe.png" alt="Gold Globe" class="anim-spin-globe" style="width: 100%; height: 100%; object-fit: cover; transform: scale(1.05);">
+      </div>
     </div>
+  </div>
 
-    <!-- ================= STAGE 2: EXACT LP-1A-LLWIN-QUOCTE ================= -->
-    <div id="stage2" class="relative z-10">
-        
+  <!-- RESPONSIVE BACKGROUND FRAMES -->
+  <img src="public/assets/desktop.png" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; pointer-events: none; filter: drop-shadow(0 20px 50px rgba(0,0,0,0.95));" alt="BG">
+
+  <!-- TOP APP LOGO HEADER -->
+  <div style="position: absolute; top: 20px; left: 50%; transform: translateX(-50%); z-index: 40; pointer-events: none;">
+    <img src="llwin-gold-logo.png" alt="LLWIN Logo" style="height: 60px; max-width: 85vw; object-fit: contain; filter: drop-shadow(0 0 25px rgba(245,174,66,0.9)) brightness(1.1);">
+  </div>
+
+  <!-- CENTER CARD & COUNTDOWN -->
+  <div style="position: relative; z-index: 50; width: 90%; max-width: 420px; text-align: center; margin-top: 60px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+    <div style="padding: 24px; border-radius: 16px; background: rgba(0,0,0,0.78); border: 1px solid rgba(245,174,66,0.4); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 0 40px rgba(245,174,66,0.25);">
+      <p id="s1-status-text" style="font-size: 13px; font-family: monospace; letter-spacing: 2px; color: #ffea9f; margin: 0 0 12px; text-transform: uppercase;">
+        ⚡ Đang khởi tạo kết nối an toàn...
+      </p>
+      <div style="width: 100%; height: 6px; background: rgba(245,174,66,0.15); border-radius: 999px; overflow: hidden; margin-bottom: 12px; box-shadow: inset 0 0 6px rgba(0,0,0,0.8);">
+        <div id="s1-progress" style="height: 100%; width: 0%; background: linear-gradient(90deg, #ea9c2c, #f5ae42, #ffea9f); box-shadow: 0 0 12px #f5ae42; transition: width 0.05s linear;"></div>
+      </div>
+      <div style="display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-family: monospace; color: rgba(226,213,195,0.7); margin-bottom: 16px;">
+        <span>XÁC THỰC BẢO MẬT VIP</span>
+        <span id="s1-countdown" style="color: #f5ae42; font-weight: bold; font-size: 13px;">5s</span>
+      </div>
+      <button onclick="dismissPreloader()" style="width: 100%; padding: 12px 20px; border-radius: 12px; background: linear-gradient(to right, #ea9c2c, #f5ae42, #ffea9f); color: #000; font-weight: 900; text-transform: uppercase; font-size: 13px; letter-spacing: 1px; border: none; cursor: pointer; box-shadow: 0 0 20px rgba(245,174,66,0.6); transition: transform 0.2s;">
+        VÀO CỔNG CHÍNH THỨC NGAY ➔
+      </button>
+    </div>
+    <div onclick="dismissPreloader()" style="margin-top: 14px; font-size: 11px; font-family: monospace; color: rgba(255,255,255,0.5); text-decoration: underline; cursor: pointer; letter-spacing: 1px;">
+      [ Bỏ qua đếm ngược ]
+    </div>
+  </div>
+</div>
+
+<script>
+let preloaderDismissed = false;
+function dismissPreloader() {
+  if (preloaderDismissed) return;
+  preloaderDismissed = true;
+  const o = document.getElementById('preload-5s-overlay');
+  if (o) {
+    o.style.opacity = '0';
+    o.style.pointerEvents = 'none';
+    setTimeout(() => {
+      if (o.parentNode) o.parentNode.removeChild(o);
+    }, 700);
+  }
+}
+
+(function run5sCountdown() {
+  const duration = 5000;
+  const startTime = Date.now();
+  const progressBar = document.getElementById("s1-progress");
+  const countdownText = document.getElementById("s1-countdown");
+  const statusText = document.getElementById("s1-status-text");
+
+  const statuses = [
+    "⚡ Đang khởi tạo kết nối an toàn...",
+    "🛡️ Đang xác thực đường truyền quốc tế...",
+    "✨ Đã đồng bộ mã hóa SSL VIP...",
+    "🚀 Đang mở cổng truy cập chính thức..."
+  ];
+
+  const timer = setInterval(() => {
+    if (preloaderDismissed) {
+      clearInterval(timer);
+      return;
+    }
+    const elapsed = Date.now() - startTime;
+    const progress = Math.min(100, (elapsed / duration) * 100);
+    const remaining = Math.max(0, Math.ceil((duration - elapsed) / 1000));
+
+    if (progressBar) progressBar.style.width = progress + "%";
+    if (countdownText) countdownText.textContent = remaining + "s";
+
+    const statusIdx = Math.min(statuses.length - 1, Math.floor((elapsed / duration) * statuses.length));
+    if (statusText) statusText.textContent = statuses[statusIdx];
+
+    if (elapsed >= duration) {
+      clearInterval(timer);
+      dismissPreloader();
+    }
+  }, 50);
+})();
+</script>
+
 
 <video id="video-bg" class="video-bg" autoplay muted loop playsinline webkit-playsinline preload="auto" fetchpriority="high" disablepictureinpicture disableremoteplayback>
   <source src="https://blob.kcam.io/uploads/kjc/1121.mp4" type="video/mp4">
@@ -642,61 +967,5 @@ function loadRest() {
 
 setTimeout(loadRest, REST_DELAY);
 </script>
-
-    </div>
-
-    <!-- SCRIPT 5S TRANSITION -->
-    <script>
-        let hasTransitioned = false;
-
-        function skipToStage2() {
-            if (hasTransitioned) return;
-            hasTransitioned = true;
-
-            const stage1 = document.getElementById("stage1");
-            const stage2 = document.getElementById("stage2");
-
-            if (stage1) stage1.classList.add("fade-out");
-            if (stage2) stage2.classList.add("active");
-
-            window.scrollTo({ top: 0, behavior: "smooth" });
-        }
-
-        function startCountdown() {
-            const duration = 5000;
-            const startTime = Date.now();
-            const progressBar = document.getElementById("cyber-progress");
-            const countdownText = document.getElementById("countdown-text");
-            const statusText = document.getElementById("cyber-status-text");
-
-            const statuses = [
-                "⚡ Đang khởi tạo kết nối an toàn...",
-                "🛡️ Đang xác thực đường truyền quốc tế...",
-                "✨ Đã đồng bộ mã hóa SSL VIP...",
-                "🚀 Đang mở cổng truy cập chính thức..."
-            ];
-
-            const timer = setInterval(() => {
-                const elapsed = Date.now() - startTime;
-                const progress = Math.min(100, (elapsed / duration) * 100);
-                const remaining = Math.max(0, Math.ceil((duration - elapsed) / 1000));
-
-                if (progressBar) progressBar.style.width = progress + "%";
-                if (countdownText) countdownText.textContent = remaining + "s";
-
-                const statusIdx = Math.min(statuses.length - 1, Math.floor((elapsed / duration) * statuses.length));
-                if (statusText) statusText.textContent = statuses[statusIdx];
-
-                if (elapsed >= duration) {
-                    clearInterval(timer);
-                    skipToStage2();
-                }
-            }, 50);
-        }
-
-        document.addEventListener("DOMContentLoaded", () => {
-            startCountdown();
-        });
-    </script>
 </body>
 </html>
